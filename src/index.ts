@@ -1,9 +1,8 @@
-import { startIndexer } from "./indexer/indexer";
 import { db } from "./clients/pgClient";
+import { startBlockProducer } from "./producers/blockProducer";
 
 async function main() {
-  console.log("Starting block indexer...");
-  await startIndexer(db);
+  await startBlockProducer(db);
 }
 
 async function shutdown(signal: string) {
@@ -16,6 +15,6 @@ process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
 main().catch(async (err) => {
-  console.error("Fatal error:", err);
+  console.error("Fatal error in block producer:", err);
   await shutdown("fatal");
 });

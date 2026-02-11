@@ -15,4 +15,8 @@ export const config = {
 
   POLL_MS: Number(process.env.POLL_MS ?? "3000"),
   CONFIRM_DEPTH: Number(process.env.CONFIRM_DEPTH ?? "3"),
+
+  KAFKA_BROKERS: requireEnv("KAFKA_BROKERS").split(","),
+  KAFKA_CLIENT_ID: process.env.KAFKA_CLIENT_ID ?? "block-indexer",
+  KAFKA_BLOCKS_TOPIC: process.env.KAFKA_BLOCKS_TOPIC ?? "blocks.raw",
 };
